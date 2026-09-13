@@ -1,0 +1,43 @@
+server {
+    listen 80;
+    listen [::]:80;
+    server_name _;
+
+    root /usr/share/nginx/html;
+    index index.html;
+    charset utf-8;
+
+    # De pagina staat achter de Cloudflare-tunnel; hij bevat geen invoervelden,
+    # geen cookies en geen backend. De policy staat daarom op 'none' met alleen
+    # de uitzonderingen die de kaart echt nodig heeft: de eigen inline stijl en
+    # het inline script (per hash), Google Fonts, en de data:- en blob:-URI's
+    # voor het favicon en de vCard-download.
+    #
+    # Let op bij wijzigen: add_header in een location-blok laat nginx alle
+    # add_headers van dit server-blok vallen. Daarom staan ze alleen hier, en
+    # regelen de locations hun houdbaarheid met `expires`, dat wel erft.
+    add_header Content-Security-Policy "default-src 'none'; script-src __SCRIPT_HASHES__; style-src __STYLE_HASHES__ https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' data:; connect-src 'self' blob:; base-uri 'none'; form-action 'none'; frame-ancestors 'none'" always;
+    add_header X-Content-Type-Options "nosniff" always;
+    add_header X-Frame-Options "DENY" always;
+    add_header Referrer-Policy "strict-origin-when-cross-origin" always;
+    add_header Permissions-Policy "geolocation=(), microphone=(), camera=()" always;
+    add_header Cross-Origin-Opener-Policy "same-origin" always;
+
+    # Een gewijzigd nummer of adres moet meteen zichtbaar zijn, dus de pagina
+    # zelf niet laten blijven hangen in de browsercache.
+    expires -1;
+
+    gzip on;
+    gzip_types text/html text/css application/javascript image/svg+xml;
+    gzip_min_length 512;
+
+    location = /health {
+        access_log off;
+        default_type text/plain;
+        return 200 "ok";
+    }
+
+    location / {
+        try_files $uri $uri/ =404;
+    }
+}

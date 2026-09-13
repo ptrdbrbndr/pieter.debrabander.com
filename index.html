@@ -1,0 +1,351 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Pieter de Brabander — 06 13 35 38 35</title>
+<meta name="description" content="Contactkaart van Pieter de Brabander. Bel, app of mail rechtstreeks, of bewaar het contact op je telefoon.">
+<meta name="theme-color" content="#0B2A4A">
+<link rel="canonical" href="https://pieter.debrabander.com/">
+<meta property="og:type" content="profile">
+<meta property="og:title" content="Pieter de Brabander">
+<meta property="og:description" content="Bel, app of mail rechtstreeks. 06 13 35 38 35.">
+<meta property="og:url" content="https://pieter.debrabander.com/">
+<meta property="og:locale" content="nl_NL">
+<meta name="twitter:card" content="summary">
+<link rel="icon" href="data:image/svg+xml,%3Csvg%20xmlns%3D%27http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%27%20viewBox%3D%270%200%2032%2032%27%3E%3Crect%20width%3D%2732%27%20height%3D%2732%27%20fill%3D%27%230B2A4A%27%2F%3E%3Crect%20x%3D%274.5%27%20y%3D%274.5%27%20width%3D%2723%27%20height%3D%2723%27%20fill%3D%27none%27%20stroke%3D%27%23BFD8ED%27%20stroke-width%3D%271.5%27%2F%3E%3Ctext%20x%3D%2716%27%20y%3D%2722%27%20font-family%3D%27monospace%27%20font-size%3D%2715%27%20font-weight%3D%27700%27%20fill%3D%27%23EAF3FA%27%20text-anchor%3D%27middle%27%3EP%3C%2Ftext%3E%3C%2Fsvg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap">
+<style>
+
+  :root{
+    --bg: #0B2A4A;
+    --grid-minor: rgba(191,216,237,0.07);
+    --grid-major: rgba(191,216,237,0.14);
+    --line: #BFD8ED;
+    --line-dim: rgba(191,216,237,0.4);
+    --white: #EAF3FA;
+    --muted: rgba(234,243,250,0.55);
+    --accent: #E2543A;
+  }
+
+  *{ box-sizing:border-box; }
+  html,body{ height:100%; }
+
+  body{
+    margin:0;
+    min-height:100vh;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    padding: 48px 18px;
+    background-color: var(--bg);
+    background-image:
+      repeating-linear-gradient(0deg, var(--grid-major) 0 1px, transparent 1px 100px),
+      repeating-linear-gradient(90deg, var(--grid-major) 0 1px, transparent 1px 100px),
+      repeating-linear-gradient(0deg, var(--grid-minor) 0 1px, transparent 1px 20px),
+      repeating-linear-gradient(90deg, var(--grid-minor) 0 1px, transparent 1px 20px);
+    font-family:'IBM Plex Mono', monospace;
+    color: var(--white);
+  }
+
+  .sheet{
+    position: relative;
+    width: 100%;
+    max-width: 460px;
+    border: 1.5px solid var(--line);
+    padding: 22px;
+  }
+  .sheet::before{
+    content:'';
+    position: absolute;
+    inset: 7px;
+    border: 1px solid var(--grid-major);
+    pointer-events:none;
+  }
+
+  .mark{
+    position:absolute;
+    width: 14px; height: 14px;
+    z-index: 2;
+  }
+  .mark::before, .mark::after{
+    content:'';
+    position:absolute;
+    background: var(--line);
+  }
+  .mark::before{ top:50%; left:0; width:100%; height:1px; transform:translateY(-50%); }
+  .mark::after{ left:50%; top:0; height:100%; width:1px; transform:translateX(-50%); }
+  .mark.tl{ top:-7px; left:-7px; }
+  .mark.tr{ top:-7px; right:-7px; }
+  .mark.bl{ bottom:-7px; left:-7px; }
+  .mark.br{ bottom:-7px; right:-7px; }
+
+  .inner{ position:relative; z-index:1; padding: 10px 6px 0; }
+
+  .kicker{
+    font-size: 10.5px;
+    font-weight: 500;
+    letter-spacing: 1.6px;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin: 0 0 22px;
+    display:flex;
+    justify-content:space-between;
+  }
+
+  .dim-line{
+    display:flex;
+    align-items:center;
+    gap: 6px;
+    color: var(--line-dim);
+    font-size: 11px;
+  }
+  .dim-line .seg{ flex:1; height:1px; background: var(--line-dim); position:relative; }
+  .dim-line .seg::before, .dim-line .seg::after{
+    content:''; position:absolute; top:-3px; width:1px; height:7px; background: var(--line-dim);
+  }
+  .dim-line .seg::before{ left:0; }
+  .dim-line .seg::after{ right:0; }
+
+  .name{
+    text-align:center;
+    font-family:'Space Grotesk', sans-serif;
+    font-weight: 700;
+    font-size: clamp(23px, 6.2vw, 29px);
+    letter-spacing: 0.3px;
+    color: var(--white);
+    margin: 0 0 16px;
+  }
+
+  .number{
+    font-family:'IBM Plex Mono', monospace;
+    font-weight: 500;
+    font-size: 17px;
+    text-align:center;
+    margin: 8px 0;
+    color: var(--white);
+    letter-spacing: 1.5px;
+  }
+  .number .dot{ color: var(--accent); font-weight:500; }
+
+  .tagline{
+    text-align:center;
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 12px;
+    line-height: 1.6;
+    color: var(--muted);
+    max-width: 300px;
+    margin: 4px auto 0;
+  }
+
+  .divider{
+    margin: 24px 0 18px;
+    border-top: 1px dashed var(--line-dim);
+  }
+
+  .status{
+    display:flex;
+    align-items:center;
+    gap: 10px;
+    margin-bottom: 18px;
+    cursor: pointer;
+    user-select:none;
+    font-size: 11px;
+    letter-spacing: 0.5px;
+  }
+  .status-label-fixed{ color: var(--muted); text-transform:uppercase; }
+  .switch{
+    width: 28px; height: 14px;
+    border: 1px solid var(--line-dim);
+    position:relative;
+    flex-shrink:0;
+  }
+  .switch .knob{
+    position:absolute;
+    top:1px; left:1px;
+    width: 10px; height: 10px;
+    background: var(--line);
+    transition: left .2s ease, background .2s ease;
+  }
+  .status.busy .switch .knob{ left: 15px; background: var(--accent); }
+  .status-value{ color: var(--white); text-transform:uppercase; }
+
+  .status:focus-visible, .row:focus-visible{ outline: 2px solid var(--accent); outline-offset: 3px; }
+
+  .rows{ display:flex; flex-direction:column; }
+
+  .row{
+    display:flex;
+    align-items:center;
+    gap: 12px;
+    padding: 11px 0;
+    border-bottom: 1px solid var(--grid-major);
+    text-decoration:none;
+    color: var(--white);
+    cursor:pointer;
+    background:none;
+    border-left:none; border-right:none; border-top:none;
+    width:100%;
+    text-align:left;
+    font-family:'IBM Plex Mono', monospace;
+  }
+  .row:first-child{ border-top: 1px solid var(--grid-major); }
+
+  .icon-box{
+    width: 30px; height: 30px;
+    border: 1px solid var(--line-dim);
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    flex-shrink:0;
+  }
+  .icon-box svg{ width:15px; height:15px; stroke: var(--line); fill:none; stroke-width:1.6; stroke-linecap:round; stroke-linejoin:round; }
+
+  .row-label{ font-size: 13px; font-weight:500; white-space:nowrap; }
+  .leader{ flex:1; border-bottom: 1px dotted var(--line-dim); margin: 0 4px; height:1px; align-self:flex-end; margin-bottom: 4px; }
+  .row-code{ font-size: 10.5px; color: var(--muted); white-space:nowrap; }
+  .row-arrow{ color: var(--line); font-size: 13px; flex-shrink:0; }
+
+  .titleblock{
+    margin-top: 22px;
+    border-top: 1.5px solid var(--line);
+    display:grid;
+    grid-template-columns: 1.3fr 1fr 0.6fr 0.6fr;
+  }
+  .tb-cell{
+    padding: 10px 10px 0;
+    border-right: 1px solid var(--grid-major);
+  }
+  .tb-cell:last-child{ border-right:none; }
+  .tb-label{ font-size: 8.5px; letter-spacing:1px; text-transform:uppercase; color: var(--muted); }
+  .tb-value{ font-size: 11.5px; color: var(--white); margin-top: 3px; }
+</style>
+</head>
+<body>
+
+  <div class="sheet">
+    <div class="mark tl"></div>
+    <div class="mark tr"></div>
+    <div class="mark bl"></div>
+    <div class="mark br"></div>
+
+    <div class="inner">
+      <div class="kicker"><span>Contactkaart — Persoonlijk</span><span>Blad 1/1</span></div>
+
+      <h2 class="name">Pieter de Brabander</h2>
+
+      <div class="dim-line"><div class="seg"></div></div>
+      <h1 class="number">06 13 35 38 35<span class="dot">.NL</span></h1>
+      <div class="dim-line"><div class="seg"></div></div>
+
+      <p class="tagline">Bel, app of mail rechtstreeks. Ik leeg deze bus zelf — meestal dezelfde dag nog.</p>
+
+      <div class="divider"></div>
+
+      <div class="status" id="statusRow" role="button" tabindex="0" aria-pressed="false" aria-label="Status wisselen tussen bereikbaar en bezet">
+        <span class="status-label-fixed">Status</span>
+        <div class="switch"><div class="knob"></div></div>
+        <span class="status-value" id="statusValue">Bereikbaar</span>
+      </div>
+
+      <div class="rows">
+        <a class="row" href="tel:+31613353835">
+          <div class="icon-box"><svg viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.8 19.8 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.8 19.8 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13 1 .36 1.97.68 2.9a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.18-1.18a2 2 0 0 1 2.11-.45c.93.32 1.9.55 2.9.68A2 2 0 0 1 22 16.92z"/></svg></div>
+          <span class="row-label">Bel direct</span>
+          <span class="leader"></span>
+          <span class="row-code">REF.01</span>
+          <span class="row-arrow">→</span>
+        </a>
+
+        <a class="row" href="https://wa.me/31613353835" target="_blank" rel="noopener">
+          <div class="icon-box"><svg viewBox="0 0 24 24"><path d="M21 11.5a8.5 8.5 0 0 1-8.5 8.5 8.4 8.4 0 0 1-4.1-1.06L3 20l1.1-5.2A8.5 8.5 0 1 1 21 11.5z"/></svg></div>
+          <span class="row-label">WhatsApp</span>
+          <span class="leader"></span>
+          <span class="row-code">REF.02</span>
+          <span class="row-arrow">→</span>
+        </a>
+
+        <a class="row" href="mailto:pieter.de.brabander@ductus.nl">
+          <div class="icon-box"><svg viewBox="0 0 24 24"><rect x="2" y="4" width="20" height="16" rx="1"/><path d="M2 6l10 7 10-7"/></svg></div>
+          <span class="row-label">Mail</span>
+          <span class="leader"></span>
+          <span class="row-code">REF.03</span>
+          <span class="row-arrow">→</span>
+        </a>
+
+        <button class="row" id="vcardBtn" type="button">
+          <div class="icon-box"><svg viewBox="0 0 24 24"><path d="M12 3v12"/><path d="M7 10l5 5 5-5"/><path d="M4 19h16"/></svg></div>
+          <span class="row-label">Bewaar contact</span>
+          <span class="leader"></span>
+          <span class="row-code">REF.04</span>
+          <span class="row-arrow">＋</span>
+        </button>
+      </div>
+
+      <div class="titleblock">
+        <div class="tb-cell">
+          <div class="tb-label">Getekend door</div>
+          <div class="tb-value">P. de Brabander</div>
+        </div>
+        <div class="tb-cell">
+          <div class="tb-label">Organisatie</div>
+          <div class="tb-value">Ductus B.V.</div>
+        </div>
+        <div class="tb-cell">
+          <div class="tb-label">Schaal</div>
+          <div class="tb-value">1:1</div>
+        </div>
+        <div class="tb-cell">
+          <div class="tb-label">Rev.</div>
+          <div class="tb-value">A</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+<script>
+  const statusRow = document.getElementById('statusRow');
+  const statusValue = document.getElementById('statusValue');
+  let busy = false;
+  const wisselStatus = () => {
+    busy = !busy;
+    statusRow.classList.toggle('busy', busy);
+    statusRow.setAttribute('aria-pressed', busy ? 'true' : 'false');
+    statusValue.textContent = busy ? 'Bezet' : 'Bereikbaar';
+  };
+  statusRow.addEventListener('click', wisselStatus);
+  statusRow.addEventListener('keydown', (e) => {
+    if (e.key === 'Enter' || e.key === ' ' || e.key === 'Spacebar') {
+      e.preventDefault();
+      wisselStatus();
+    }
+  });
+
+  document.getElementById('vcardBtn').addEventListener('click', () => {
+    const vcard = [
+      'BEGIN:VCARD',
+      'VERSION:3.0',
+      'N:de Brabander;Pieter;;;',
+      'FN:Pieter de Brabander',
+      'ORG:Ductus B.V.',
+      'TEL;TYPE=CELL:+31613353835',
+      'EMAIL:pieter.de.brabander@ductus.nl',
+      'URL:https://ductus.nl',
+      'END:VCARD'
+    ].join('\r\n');
+    const blob = new Blob([vcard], { type: 'text/vcard' });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = 'pieter-de-brabander.vcf';
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+    setTimeout(() => URL.revokeObjectURL(url), 10000);
+  });
+</script>
+
+</body>
+</html>
