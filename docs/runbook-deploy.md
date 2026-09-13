@@ -47,6 +47,11 @@ shell leest de pipe. Lees hem uit het bestand of zet hem tussen aanhalingstekens
 De API zit op `http://192.168.68.71:8000/api/v1`; de waarde van `COOLIFY_API_URL`
 in `c:\Projecten\.env` mist het `/api/v1`-deel.
 
+**De QR-code** wordt niet in de browser opgebouwd maar staat als SVG-pad in de
+pagina; `scripts/genereer-qr.py` zet hem erin. Verandert de URL van de kaart, dan
+moet dat script opnieuw draaien — anders wijst de code naar het oude adres
+zonder dat iemand het merkt.
+
 ## Wat we onderweg tegenkwamen
 
 **Cloudflare brak de mail-knop.** E-mailobfuscatie staat aan voor de zone: de

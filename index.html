@@ -5,7 +5,16 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Pieter de Brabander — 06 13 35 38 35</title>
 <meta name="description" content="Contactkaart van Pieter de Brabander. Bel, app of mail rechtstreeks, of bewaar het contact op je telefoon.">
-<meta name="theme-color" content="#0B2A4A">
+<meta name="theme-color" content="#FAF8F2" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#0B2A4A" media="(prefers-color-scheme: dark)">
+<script>
+  try {
+    var gekozen = localStorage.getItem('thema');
+    if (gekozen === 'licht' || gekozen === 'donker') {
+      document.documentElement.setAttribute('data-thema', gekozen);
+    }
+  } catch (e) {}
+</script>
 <link rel="canonical" href="https://pieter.debrabander.com/">
 <meta property="og:type" content="profile">
 <meta property="og:title" content="Pieter de Brabander">
@@ -19,15 +28,51 @@
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap">
 <style>
 
+  /* Het lichte palet is de basis. Het donkere staat er twee keer achter: een
+     keer voor wie zijn toestel op donker heeft staan en zelf niets gekozen
+     heeft, en een keer voor wie de schakelaar op donker zet. De QR-code houdt
+     in beide gevallen donkere blokjes op een lichte ondergrond, want een
+     omgekeerde code lezen lukt niet elke camera. */
   :root{
-    --bg: #0B2A4A;
-    --grid-minor: rgba(191,216,237,0.07);
-    --grid-major: rgba(191,216,237,0.14);
-    --line: #BFD8ED;
-    --line-dim: rgba(191,216,237,0.4);
-    --white: #EAF3FA;
-    --muted: rgba(234,243,250,0.55);
+    --bg: #FAF8F2;
+    --grid-minor: rgba(11,42,74,0.055);
+    --grid-major: rgba(11,42,74,0.12);
+    --line: #0B2A4A;
+    --line-dim: rgba(11,42,74,0.38);
+    --white: #0B2A4A;
+    --muted: rgba(11,42,74,0.55);
     --accent: #E2543A;
+    --sheet-bg: rgba(255,255,255,0.35);
+    --qr-bg: #FFFFFF;
+    --qr-fg: #0B2A4A;
+  }
+
+  @media (prefers-color-scheme: dark){
+    :root:not([data-thema="licht"]){
+      --bg: #0B2A4A;
+      --grid-minor: rgba(191,216,237,0.07);
+      --grid-major: rgba(191,216,237,0.14);
+      --line: #BFD8ED;
+      --line-dim: rgba(191,216,237,0.4);
+      --white: #EAF3FA;
+      --muted: rgba(234,243,250,0.55);
+      --accent: #E2543A;
+      --sheet-bg: transparent;
+      --qr-bg: #EAF3FA;
+    }
+  }
+
+  :root[data-thema="donker"]{
+      --bg: #0B2A4A;
+      --grid-minor: rgba(191,216,237,0.07);
+      --grid-major: rgba(191,216,237,0.14);
+      --line: #BFD8ED;
+      --line-dim: rgba(191,216,237,0.4);
+      --white: #EAF3FA;
+      --muted: rgba(234,243,250,0.55);
+      --accent: #E2543A;
+      --sheet-bg: transparent;
+      --qr-bg: #EAF3FA;
   }
 
   *{ box-sizing:border-box; }
@@ -56,6 +101,7 @@
     max-width: 460px;
     border: 1.5px solid var(--line);
     padding: 22px;
+    background: var(--sheet-bg);
   }
   .sheet::before{
     content:'';
@@ -155,7 +201,7 @@
     font-size: 11px;
     letter-spacing: 0.5px;
   }
-  .status-label-fixed{ color: var(--muted); text-transform:uppercase; }
+  .status-label-fixed{ color: var(--muted); text-transform:uppercase; min-width: 62px; }
   .switch{
     width: 28px; height: 14px;
     border: 1px solid var(--line-dim);
@@ -170,7 +216,11 @@
     transition: left .2s ease, background .2s ease;
   }
   .status.busy .switch .knob{ left: 15px; background: var(--accent); }
+  .status.aan .switch .knob{ left: 15px; }
   .status-value{ color: var(--white); text-transform:uppercase; }
+
+  .schakelaars{ display:flex; flex-wrap:wrap; gap: 6px 26px; margin-bottom: 18px; }
+  .schakelaars .status{ margin-bottom: 0; }
 
   .status:focus-visible, .row:focus-visible{ outline: 2px solid var(--accent); outline-offset: 3px; }
 
@@ -207,6 +257,26 @@
   .leader{ flex:1; border-bottom: 1px dotted var(--line-dim); margin: 0 4px; height:1px; align-self:flex-end; margin-bottom: 4px; }
   .row-code{ font-size: 10.5px; color: var(--muted); white-space:nowrap; }
   .row-arrow{ color: var(--line); font-size: 13px; flex-shrink:0; }
+
+  .deelblok{
+    display:flex;
+    align-items:center;
+    gap: 14px;
+    margin-top: 20px;
+    padding-top: 16px;
+    border-top: 1px dashed var(--line-dim);
+  }
+  .qr{
+    width: 100px;
+    height: 100px;
+    flex-shrink: 0;
+    padding: 3px;
+    background: var(--qr-bg);
+    border: 1px solid var(--line-dim);
+  }
+  .qr svg{ display:block; width:100%; height:100%; }
+  .deel-url{ font-size: 12.5px; color: var(--white); margin-top: 4px; letter-spacing: 0.2px; }
+  .deel-hint{ font-size: 10.5px; line-height: 1.55; color: var(--muted); margin: 7px 0 0; }
 
   .titleblock{
     margin-top: 22px;
@@ -245,10 +315,17 @@
 
       <div class="divider"></div>
 
-      <div class="status" id="statusRow" role="button" tabindex="0" aria-pressed="false" aria-label="Status wisselen tussen bereikbaar en bezet">
-        <span class="status-label-fixed">Status</span>
-        <div class="switch"><div class="knob"></div></div>
-        <span class="status-value" id="statusValue">Bereikbaar</span>
+      <div class="schakelaars">
+        <div class="status" id="statusRow" role="button" tabindex="0" aria-pressed="false" aria-label="Status wisselen tussen bereikbaar en bezet">
+          <span class="status-label-fixed">Status</span>
+          <div class="switch"><div class="knob"></div></div>
+          <span class="status-value" id="statusValue">Bereikbaar</span>
+        </div>
+        <div class="status" id="themaRow" role="button" tabindex="0" aria-pressed="false" aria-label="Weergave wisselen tussen licht en donker">
+          <span class="status-label-fixed">Weergave</span>
+          <div class="switch"><div class="knob"></div></div>
+          <span class="status-value" id="themaValue">Licht</span>
+        </div>
       </div>
 
       <div class="rows">
@@ -283,6 +360,15 @@
           <span class="row-code">REF.04</span>
           <span class="row-arrow">＋</span>
         </button>
+      </div>
+
+      <div class="deelblok">
+        <div class="qr"><!-- qr:start --><svg viewBox="-4 -4 37 37" role="img" aria-label="QR-code naar https://pieter.debrabander.com/" shape-rendering="crispEdges"><path fill="var(--qr-fg)" d="M0 0h7v1h-7zM10 0h1v1h-1zM15 0h1v1h-1zM17 0h2v1h-2zM22 0h7v1h-7zM0 1h1v1h-1zM6 1h1v1h-1zM8 1h1v1h-1zM10 1h1v1h-1zM13 1h4v1h-4zM19 1h2v1h-2zM22 1h1v1h-1zM28 1h1v1h-1zM0 2h1v1h-1zM2 2h3v1h-3zM6 2h1v1h-1zM9 2h1v1h-1zM12 2h5v1h-5zM20 2h1v1h-1zM22 2h1v1h-1zM24 2h3v1h-3zM28 2h1v1h-1zM0 3h1v1h-1zM2 3h3v1h-3zM6 3h1v1h-1zM8 3h3v1h-3zM14 3h2v1h-2zM17 3h1v1h-1zM19 3h2v1h-2zM22 3h1v1h-1zM24 3h3v1h-3zM28 3h1v1h-1zM0 4h1v1h-1zM2 4h3v1h-3zM6 4h1v1h-1zM8 4h2v1h-2zM11 4h1v1h-1zM17 4h1v1h-1zM19 4h1v1h-1zM22 4h1v1h-1zM24 4h3v1h-3zM28 4h1v1h-1zM0 5h1v1h-1zM6 5h1v1h-1zM9 5h1v1h-1zM11 5h2v1h-2zM16 5h1v1h-1zM18 5h1v1h-1zM20 5h1v1h-1zM22 5h1v1h-1zM28 5h1v1h-1zM0 6h7v1h-7zM8 6h1v1h-1zM10 6h1v1h-1zM12 6h1v1h-1zM14 6h1v1h-1zM16 6h1v1h-1zM18 6h1v1h-1zM20 6h1v1h-1zM22 6h7v1h-7zM8 7h1v1h-1zM11 7h3v1h-3zM15 7h1v1h-1zM19 7h2v1h-2zM1 8h1v1h-1zM3 8h4v1h-4zM8 8h1v1h-1zM10 8h1v1h-1zM14 8h1v1h-1zM17 8h1v1h-1zM21 8h2v1h-2zM24 8h2v1h-2zM27 8h1v1h-1zM0 9h3v1h-3zM4 9h1v1h-1zM9 9h1v1h-1zM12 9h3v1h-3zM16 9h1v1h-1zM18 9h3v1h-3zM23 9h2v1h-2zM26 9h2v1h-2zM0 10h1v1h-1zM4 10h1v1h-1zM6 10h1v1h-1zM8 10h2v1h-2zM14 10h4v1h-4zM20 10h3v1h-3zM24 10h1v1h-1zM3 11h2v1h-2zM10 11h2v1h-2zM13 11h1v1h-1zM15 11h1v1h-1zM17 11h3v1h-3zM23 11h3v1h-3zM28 11h1v1h-1zM1 12h1v1h-1zM3 12h2v1h-2zM6 12h3v1h-3zM11 12h1v1h-1zM15 12h1v1h-1zM19 12h4v1h-4zM27 12h1v1h-1zM0 13h2v1h-2zM3 13h1v1h-1zM7 13h1v1h-1zM9 13h2v1h-2zM12 13h1v1h-1zM14 13h1v1h-1zM16 13h3v1h-3zM22 13h1v1h-1zM24 13h1v1h-1zM26 13h1v1h-1zM28 13h1v1h-1zM0 14h1v1h-1zM2 14h1v1h-1zM4 14h1v1h-1zM6 14h2v1h-2zM9 14h1v1h-1zM13 14h1v1h-1zM17 14h1v1h-1zM19 14h1v1h-1zM23 14h1v1h-1zM25 14h1v1h-1zM28 14h1v1h-1zM2 15h1v1h-1zM4 15h2v1h-2zM7 15h1v1h-1zM10 15h5v1h-5zM16 15h1v1h-1zM20 15h1v1h-1zM24 15h5v1h-5zM6 16h2v1h-2zM10 16h1v1h-1zM12 16h1v1h-1zM14 16h2v1h-2zM23 16h1v1h-1zM25 16h1v1h-1zM0 17h1v1h-1zM4 17h1v1h-1zM7 17h2v1h-2zM11 17h2v1h-2zM16 17h5v1h-5zM24 17h1v1h-1zM0 18h2v1h-2zM3 18h5v1h-5zM13 18h5v1h-5zM19 18h1v1h-1zM23 18h1v1h-1zM25 18h1v1h-1zM28 18h1v1h-1zM0 19h4v1h-4zM5 19h1v1h-1zM8 19h3v1h-3zM12 19h2v1h-2zM19 19h1v1h-1zM21 19h2v1h-2zM24 19h1v1h-1zM26 19h3v1h-3zM0 20h4v1h-4zM6 20h1v1h-1zM8 20h2v1h-2zM12 20h1v1h-1zM15 20h3v1h-3zM19 20h8v1h-8zM8 21h1v1h-1zM10 21h2v1h-2zM15 21h1v1h-1zM17 21h1v1h-1zM19 21h2v1h-2zM24 21h3v1h-3zM0 22h7v1h-7zM9 22h3v1h-3zM14 22h2v1h-2zM17 22h1v1h-1zM19 22h2v1h-2zM22 22h1v1h-1zM24 22h1v1h-1zM26 22h1v1h-1zM0 23h1v1h-1zM6 23h1v1h-1zM8 23h1v1h-1zM10 23h1v1h-1zM13 23h1v1h-1zM15 23h1v1h-1zM17 23h1v1h-1zM19 23h2v1h-2zM24 23h2v1h-2zM28 23h1v1h-1zM0 24h1v1h-1zM2 24h3v1h-3zM6 24h1v1h-1zM8 24h3v1h-3zM12 24h3v1h-3zM16 24h1v1h-1zM18 24h7v1h-7zM28 24h1v1h-1zM0 25h1v1h-1zM2 25h3v1h-3zM6 25h1v1h-1zM8 25h5v1h-5zM14 25h1v1h-1zM18 25h1v1h-1zM23 25h1v1h-1zM25 25h3v1h-3zM0 26h1v1h-1zM2 26h3v1h-3zM6 26h1v1h-1zM15 26h1v1h-1zM17 26h2v1h-2zM20 26h2v1h-2zM23 26h2v1h-2zM27 26h2v1h-2zM0 27h1v1h-1zM6 27h1v1h-1zM8 27h1v1h-1zM13 27h3v1h-3zM18 27h1v1h-1zM21 27h2v1h-2zM24 27h3v1h-3zM28 27h1v1h-1zM0 28h7v1h-7zM9 28h1v1h-1zM13 28h1v1h-1zM18 28h4v1h-4zM23 28h2v1h-2z"/></svg><!-- qr:end --></div>
+        <div>
+          <div class="tb-label">Deel deze kaart</div>
+          <div class="deel-url">pieter.debrabander.com</div>
+          <p class="deel-hint">Richt een camera op de code; de ander heeft deze kaart dan zelf, met nummer en adres erin.</p>
+        </div>
       </div>
 
       <div class="titleblock">
@@ -323,6 +409,46 @@
       wisselStatus();
     }
   });
+
+  const themaRow = document.getElementById('themaRow');
+  const themaValue = document.getElementById('themaValue');
+  const donkerMedia = window.matchMedia('(prefers-color-scheme: dark)');
+
+  const eigenKeuze = () => document.documentElement.getAttribute('data-thema');
+  const huidigThema = () => eigenKeuze() || (donkerMedia.matches ? 'donker' : 'licht');
+
+  const toonThema = () => {
+    const donker = huidigThema() === 'donker';
+    themaRow.classList.toggle('aan', donker);
+    themaRow.setAttribute('aria-pressed', donker ? 'true' : 'false');
+    themaValue.textContent = donker ? 'Donker' : 'Licht';
+    // De browserbalk volgt vanzelf het systeem; alleen na een eigen keuze
+    // moeten we hem overrulen.
+    if (eigenKeuze()) {
+      const kleur = donker ? '#0B2A4A' : '#FAF8F2';
+      document.querySelectorAll('meta[name="theme-color"]').forEach((m) => {
+        m.setAttribute('content', kleur);
+      });
+    }
+  };
+
+  const wisselThema = () => {
+    const nieuw = huidigThema() === 'donker' ? 'licht' : 'donker';
+    document.documentElement.setAttribute('data-thema', nieuw);
+    try { localStorage.setItem('thema', nieuw); } catch (e) {}
+    toonThema();
+  };
+
+  themaRow.addEventListener('click', wisselThema);
+  themaRow.addEventListener('keydown', (e) => {
+    if (e.key === 'Enter' || e.key === ' ' || e.key === 'Spacebar') {
+      e.preventDefault();
+      wisselThema();
+    }
+  });
+  // Zolang niemand zelf gekozen heeft, beweegt de kaart mee met het toestel.
+  donkerMedia.addEventListener('change', () => { if (!eigenKeuze()) toonThema(); });
+  toonThema();
 
   document.getElementById('vcardBtn').addEventListener('click', () => {
     const vcard = [

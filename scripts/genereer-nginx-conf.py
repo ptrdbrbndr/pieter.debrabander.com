@@ -11,7 +11,7 @@ import io
 import re
 import sys
 
-HTML_BESTANDEN = ("index.html", "licht-alternatief.html")
+HTML_BESTANDEN = ("index.html",)
 
 
 def hashes(patroon, bronnen):
@@ -24,7 +24,7 @@ def hashes(patroon, bronnen):
         for blok in blokken:
             digest = hashlib.sha256(blok.encode("utf-8")).digest()
             gevonden.append("'sha256-" + base64.b64encode(digest).decode() + "'")
-    # dubbele hashes (identiek script in beide varianten) maar een keer opnemen
+    # dubbele hashes maar een keer opnemen
     uniek = []
     for h in gevonden:
         if h not in uniek:
