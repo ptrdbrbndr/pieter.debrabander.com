@@ -1,0 +1,3 @@
+# De hash in de Content-Security-Policy wordt over de bestandsinhoud berekend;
+# houd de regeleindes daarom overal gelijk.
+* text=auto eol=lf
